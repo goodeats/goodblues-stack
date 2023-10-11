@@ -1,32 +1,32 @@
-import fs from "node:fs";
-import path from "node:path";
-import url from "node:url";
+import fs from 'node:fs';
+import path from 'node:path';
+import url from 'node:url';
 
-import prom from "@isaacs/express-prometheus-middleware";
-import { createRequestHandler } from "@remix-run/express";
-import type { ServerBuild } from "@remix-run/node";
-import { broadcastDevReady, installGlobals } from "@remix-run/node";
-import chokidar from "chokidar";
-import compression from "compression";
-import type { RequestHandler } from "express";
-import express from "express";
-import morgan from "morgan";
-import sourceMapSupport from "source-map-support";
+import prom from '@isaacs/express-prometheus-middleware';
+import { createRequestHandler } from '@remix-run/express';
+import type { ServerBuild } from '@remix-run/node';
+import { broadcastDevReady, installGlobals } from '@remix-run/node';
+import chokidar from 'chokidar';
+import compression from 'compression';
+import type { RequestHandler } from 'express';
+import express from 'express';
+import morgan from 'morgan';
+import sourceMapSupport from 'source-map-support';
 
 sourceMapSupport.install();
 installGlobals();
 run();
 
 async function run() {
-  const BUILD_PATH = path.resolve("build/index.js");
-  const VERSION_PATH = path.resolve("build/version.txt");
+  const BUILD_PATH = path.resolve('build/index.js');
+  const VERSION_PATH = path.resolve('build/version.txt');
   const initialBuild = await reimportServer();
 
   const app = express();
   const metricsApp = express();
   app.use(
     prom({
-      metricsPath: "/metrics",
+      metricsPath: '/metrics',
       collectDefaultMetrics: true,
       metricsApp,
     }),
@@ -34,13 +34,13 @@ async function run() {
 
   app.use((req, res, next) => {
     // helpful headers:
-    res.set("x-fly-region", process.env.FLY_REGION ?? "unknown");
-    res.set("Strict-Transport-Security", `max-age=${60 * 60 * 24 * 365 * 100}`);
+    res.set('x-fly-region', process.env.FLY_REGION ?? 'unknown');
+    res.set('Strict-Transport-Security', `max-age=${60 * 60 * 24 * 365 * 100}`);
 
     // /clean-urls/ -> /clean-urls
-    if (req.path.endsWith("/") && req.path.length > 1) {
+    if (req.path.endsWith('/') && req.path.length > 1) {
       const query = req.url.slice(req.path.length);
-      const safepath = req.path.slice(0, -1).replace(/\/+/g, "/");
+      const safepath = req.path.slice(0, -1).replace(/\/+/g, '/');
       res.redirect(301, safepath + query);
       return;
     }
@@ -51,11 +51,11 @@ async function run() {
   // non-GET/HEAD/OPTIONS requests hit the primary region rather than read-only
   // Postgres DBs.
   // learn more: https://fly.io/docs/getting-started/multi-region-databases/#replay-the-request
-  app.all("*", function getReplayResponse(req, res, next) {
+  app.all('*', function getReplayResponse(req, res, next) {
     const { method, path: pathname } = req;
     const { PRIMARY_REGION, FLY_REGION } = process.env;
 
-    const isMethodReplayable = !["GET", "OPTIONS", "HEAD"].includes(method);
+    const isMethodReplayable = !['GET', 'OPTIONS', 'HEAD'].includes(method);
     const isReadOnlyRegion =
       FLY_REGION && PRIMARY_REGION && FLY_REGION !== PRIMARY_REGION;
 
@@ -70,30 +70,30 @@ async function run() {
       FLY_REGION,
     };
     console.info(`Replaying:`, logInfo);
-    res.set("fly-replay", `region=${PRIMARY_REGION}`);
+    res.set('fly-replay', `region=${PRIMARY_REGION}`);
     return res.sendStatus(409);
   });
 
   app.use(compression());
 
   // http://expressjs.com/en/advanced/best-practice-security.html#at-a-minimum-disable-x-powered-by-header
-  app.disable("x-powered-by");
+  app.disable('x-powered-by');
 
   // Remix fingerprints its assets so we can cache forever.
   app.use(
-    "/build",
-    express.static("public/build", { immutable: true, maxAge: "1y" }),
+    '/build',
+    express.static('public/build', { immutable: true, maxAge: '1y' }),
   );
 
   // Everything else (like favicon.ico) is cached for an hour. You may want to be
   // more aggressive with this caching.
-  app.use(express.static("public", { maxAge: "1h" }));
+  app.use(express.static('public', { maxAge: '1h' }));
 
-  app.use(morgan("tiny"));
+  app.use(morgan('tiny'));
 
   app.all(
-    "*",
-    process.env.NODE_ENV === "development"
+    '*',
+    process.env.NODE_ENV === 'development'
       ? createDevRequestHandler(initialBuild)
       : createRequestHandler({
           build: initialBuild,
@@ -105,7 +105,7 @@ async function run() {
   app.listen(port, () => {
     console.log(`✅ app ready: http://localhost:${port}`);
 
-    if (process.env.NODE_ENV === "development") {
+    if (process.env.NODE_ENV === 'development') {
       broadcastDevReady(initialBuild);
     }
   });
@@ -130,7 +130,7 @@ async function run() {
     const BUILD_URL = url.pathToFileURL(BUILD_PATH).href;
 
     // use a timestamp query parameter to bust the import cache
-    return import(BUILD_URL + "?t=" + stat.mtimeMs);
+    return import(BUILD_URL + '?t=' + stat.mtimeMs);
   }
 
   function createDevRequestHandler(initialBuild: ServerBuild): RequestHandler {
@@ -143,15 +143,15 @@ async function run() {
     }
     chokidar
       .watch(VERSION_PATH, { ignoreInitial: true })
-      .on("add", handleServerUpdate)
-      .on("change", handleServerUpdate);
+      .on('add', handleServerUpdate)
+      .on('change', handleServerUpdate);
 
     // wrap request handler to make sure its recreated with the latest build for every request
     return async (req, res, next) => {
       try {
         return createRequestHandler({
           build,
-          mode: "development",
+          mode: 'development',
         })(req, res, next);
       } catch (error) {
         next(error);
