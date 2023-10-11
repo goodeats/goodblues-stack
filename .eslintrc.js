@@ -6,6 +6,7 @@ module.exports = {
     '@remix-run/eslint-config/node',
     '@remix-run/eslint-config/jest-testing-library',
     'prettier',
+    'plugin:tailwindcss/recommended',
   ],
   env: {
     'cypress/globals': true,
