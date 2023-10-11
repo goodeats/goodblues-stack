@@ -11,6 +11,7 @@ npx create-remix@latest --template goodeats/goodblues-stack
 ## What's different in this stack from Blues?
 
 - [Prettier](https://prettier.io/) and [ESLint](https://eslint.org/) settings, especially with using Tailwind CSS
+- [GoodUI](https://github.com/goodeats/goodui) component library created by me
 
 Not a fan of bits of the stack? Fork it, change it, and use `npx create-remix --template your/repo`! Make it your own.
 
