@@ -3,7 +3,7 @@ import { Link } from '@remix-run/react';
 
 import { useOptionalUser } from '~/utils';
 
-export const meta: MetaFunction = () => [{ title: 'Remix Notes' }];
+export const meta: MetaFunction = () => [{ title: 'Good Remix' }];
 
 export default function Index() {
   const user = useOptionalUser();
@@ -23,7 +23,7 @@ export default function Index() {
             <div className="relative px-4 pb-8 pt-16 sm:px-6 sm:pb-14 sm:pt-24 lg:px-8 lg:pb-20 lg:pt-32">
               <h1 className="text-center text-6xl font-extrabold tracking-tight sm:text-8xl lg:text-9xl">
                 <span className="block uppercase text-blue-500 drop-shadow-md">
-                  Blues Stack
+                  Good Blues Stack
                 </span>
               </h1>
               <p className="mx-auto mt-6 max-w-lg text-center text-xl text-white sm:max-w-3xl">
