@@ -1,9 +1,9 @@
 import type { MetaFunction } from '@remix-run/node';
-import { LinkButton } from '~/components';
 
+import { LinkButton } from '~/components';
 import { useOptionalUser } from '~/utils';
 
-export const meta: MetaFunction = () => [{ title: 'Remix is Good' }];
+export const meta: MetaFunction = () => [{ title: 'Remix is Good ' }];
 
 export default function Index() {
   const user = useOptionalUser();
@@ -38,21 +38,33 @@ export default function Index() {
           <div className="relative shadow-xl sm:overflow-hidden sm:rounded-2xl">
             <div className="absolute inset-0">
               <img
-                className="h-full w-full object-cover"
+                className="h-full w-full object-cover opacity-75"
                 src="https://user-images.githubusercontent.com/1500684/158276320-c46b661b-8eff-4a4d-82c6-cf296c987a12.jpg"
                 alt="BB King playing blues on his Gibson 'Lucille' guitar"
               />
-              <div className="absolute inset-0 bg-[color:rgba(27,167,254,0.5)] mix-blend-multiply" />
+              <div className="absolute inset-0 bg-green-700 opacity-25 mix-blend-multiply" />
             </div>
             <div className="relative px-4 pb-8 pt-16 sm:px-6 sm:pb-14 sm:pt-24 lg:px-8 lg:pb-20 lg:pt-32">
               <h1 className="text-center text-6xl font-extrabold tracking-tight sm:text-8xl lg:text-9xl">
-                <span className="block uppercase text-blue-500 drop-shadow-md">
-                  Good Blues Stack
+                <span className="block uppercase text-primary-foreground drop-shadow-md">
+                  goodblues stack
                 </span>
               </h1>
               <p className="mx-auto mt-6 max-w-lg text-center text-xl text-white sm:max-w-3xl">
-                Check the README.md file for instructions on how to get this
-                project deployed.
+                The Good Blues Stack is the Blues Stack by Remix Run with
+                additional features that I would be using in my own projects.
+                Follow the progress on{' '}
+                <LinkButton
+                  to="https://github.com/goodeats/goodblues-stack"
+                  variant="link"
+                  size="lg"
+                  external
+                  newTab
+                  className="p-1 text-xl text-primary"
+                >
+                  Github
+                </LinkButton>
+                .
               </p>
               <div className="mx-auto mt-10 max-w-sm sm:flex sm:max-w-none sm:justify-center">
                 {user ? renderUserLoggedIn(user) : renderUserLoggedOut()}
@@ -66,6 +78,11 @@ export default function Index() {
               </a>
             </div>
           </div>
+          <p className="mx-auto mt-6 max-w-lg text-left text-xl text-secondary-foreground sm:max-w-3xl ">
+            The Good Blues Stack is a full-stack starter kit for building web
+            applications with Remix, Prisma, and Postgres. It includes
+            authentication, database access, and a variety of other features.
+          </p>
         </div>
       </div>
     </main>
