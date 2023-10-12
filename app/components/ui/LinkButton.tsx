@@ -9,7 +9,7 @@ interface LinkButtonProps extends ButtonProps {
 
 const LinkButton = ({ to, children, ...props }: LinkButtonProps) => {
   return (
-    <Button {...props}>
+    <Button asChild {...props}>
       <Link to={to}>{children}</Link>
     </Button>
   );
