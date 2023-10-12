@@ -4,7 +4,7 @@ import { LinkButton } from '~/components';
 
 import { useOptionalUser } from '~/utils';
 
-export const meta: MetaFunction = () => [{ title: 'Good Remix' }];
+export const meta: MetaFunction = () => [{ title: 'Remix is Good' }];
 
 export default function Index() {
   const user = useOptionalUser();
