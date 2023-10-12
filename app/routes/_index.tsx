@@ -1,5 +1,4 @@
 import type { MetaFunction } from '@remix-run/node';
-import { Link } from '@remix-run/react';
 import { LinkButton } from '~/components';
 
 import { useOptionalUser } from '~/utils';
@@ -13,12 +12,9 @@ export default function Index() {
     if (!user) return null;
 
     return (
-      <Link
-        to="/notes"
-        className="flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-3 text-base font-medium text-blue-700 shadow-sm hover:bg-blue-50 sm:px-8"
-      >
+      <LinkButton to="/notes" size="lg">
         View Notes for {user.email}
-      </Link>
+      </LinkButton>
     );
   };
 
