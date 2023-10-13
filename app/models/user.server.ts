@@ -42,23 +42,19 @@ export async function deleteUserByEmail(email: User['email']) {
 }
 
 export async function verifyLogin(
-  username: User['username'],
-  email: User['email'],
+  login: User['username'] | User['email'],
+  loginType: 'username' | 'email',
   password: Password['hash'],
 ) {
-  const userWithPassword = await (username
-    ? prisma.user.findUnique({
-        where: { username },
-        include: {
-          password: true,
-        },
-      })
-    : prisma.user.findUnique({
-        where: { email },
-        include: {
-          password: true,
-        },
-      }));
+  const queryLogin =
+    loginType === 'username' ? { username: login } : { email: login };
+
+  const userWithPassword = await prisma.user.findUnique({
+    where: queryLogin,
+    include: {
+      password: true,
+    },
+  });
 
   if (!userWithPassword || !userWithPassword.password) {
     return null;
