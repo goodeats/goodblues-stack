@@ -6,7 +6,7 @@ import type {
 import { json, redirect } from '@remix-run/node';
 import { Form, Link, useActionData, useSearchParams } from '@remix-run/react';
 import { useEffect, useRef } from 'react';
-import { Button, Input } from '~/components';
+import { Button, Input, Label } from '~/components';
 
 import {
   createUser,
@@ -138,12 +138,12 @@ export default function Join() {
       <div className="mx-auto w-full max-w-md px-8">
         <Form method="post" className="space-y-6">
           <div>
-            <label
+            <Label
               htmlFor="username"
               className="block text-sm font-medium text-gray-700"
             >
               Username
-            </label>
+            </Label>
             <div className="mt-1">
               <Input
                 ref={usernameRef}
@@ -165,12 +165,12 @@ export default function Join() {
             </div>
           </div>
           <div>
-            <label
+            <Label
               htmlFor="email"
               className="block text-sm font-medium text-gray-700"
             >
               Email address
-            </label>
+            </Label>
             <div className="mt-1">
               <Input
                 ref={emailRef}
@@ -192,12 +192,12 @@ export default function Join() {
           </div>
 
           <div>
-            <label
+            <Label
               htmlFor="password"
               className="block text-sm font-medium text-gray-700"
             >
               Password
-            </label>
+            </Label>
             <div className="mt-1">
               <Input
                 id="password"
