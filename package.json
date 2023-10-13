@@ -39,7 +39,7 @@
   ],
   "dependencies": {
     "@isaacs/express-prometheus-middleware": "^1.2.1",
-    "@prisma/client": "^4.16.2",
+    "@prisma/client": "^5.4.2",
     "@remix-run/css-bundle": "*",
     "@remix-run/express": "*",
     "@remix-run/node": "*",
@@ -91,7 +91,7 @@
     "postcss": "^8.4.28",
     "prettier": "^3.0.2",
     "prettier-plugin-tailwindcss": "^0.5.5",
-    "prisma": "^4.16.2",
+    "prisma": "^5.4.2",
     "start-server-and-test": "^2.0.0",
     "tailwindcss": "^3.3.3",
     "tailwindcss-animate": "^1.0.7",
