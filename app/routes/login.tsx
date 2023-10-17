@@ -171,7 +171,7 @@ export default function LoginPage() {
               <Link
                 className="text-blue-500 underline"
                 to={{
-                  pathname: '/join',
+                  pathname: '/signup',
                   search: searchParams.toString(),
                 }}
               >
