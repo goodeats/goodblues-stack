@@ -21,7 +21,7 @@ export default function Index() {
   const renderUserLoggedOut = () => {
     return (
       <div className="space-y-4 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5 sm:space-y-0">
-        <LinkButton to="/join" variant="secondary" size="lg">
+        <LinkButton to="/signup" variant="secondary" size="lg">
           Sign up
         </LinkButton>
         <LinkButton to="/login" variant="default" size="lg">
@@ -46,7 +46,7 @@ export default function Index() {
             </div>
             <div className="relative px-4 pb-8 pt-16 sm:px-6 sm:pb-14 sm:pt-24 lg:px-8 lg:pb-20 lg:pt-32">
               <h1 className="text-center text-6xl font-extrabold tracking-tight sm:text-8xl lg:text-9xl">
-                <span className="block uppercase text-primary-foreground drop-shadow-md">
+                <span className="text-primary-foreground block uppercase drop-shadow-md">
                   goodblues stack
                 </span>
               </h1>
@@ -60,7 +60,7 @@ export default function Index() {
                   size="lg"
                   external
                   newTab
-                  className="p-1 text-xl text-primary"
+                  className="text-primary p-1 text-xl"
                 >
                   Github
                 </LinkButton>
@@ -78,7 +78,7 @@ export default function Index() {
               </a>
             </div>
           </div>
-          <p className="mx-auto mt-6 max-w-lg text-left text-xl text-secondary-foreground sm:max-w-3xl ">
+          <p className="text-secondary-foreground mx-auto mt-6 max-w-lg text-left text-xl sm:max-w-3xl ">
             The Good Blues Stack is a full-stack starter kit for building web
             applications with Remix, Prisma, and Postgres. It includes
             authentication, database access, and a variety of other features.
